@@ -1,0 +1,22 @@
+{
+  "extName": {
+    "message": "OrangeDuck - Smart Bookmarks",
+    "description": "Extension name"
+  },
+  "extShortName": {
+    "message": "OrangeDuck",
+    "description": "Short name for extension (max 12 chars)"
+  },
+  "extDescription": {
+    "message": "AI-powered bookmark manager: auto-summarize, dead link detection, page snapshots, semantic search, and scam protection.",
+    "description": "Extension description"
+  },
+  "cmdSaveBookmark": {
+    "message": "Save to OrangeDuck",
+    "description": "Context menu item for saving bookmark"
+  },
+  "cmdOpenManager": {
+    "message": "Open bookmark manager",
+    "description": "Command to open manager"
+  }
+}

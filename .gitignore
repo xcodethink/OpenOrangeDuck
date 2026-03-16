@@ -1,0 +1,53 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Environment variables & secrets
+.env
+.env.*
+.dev.vars
+
+# Cloudflare
+.wrangler/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Test coverage
+coverage/
+
+# TypeScript cache
+*.tsbuildinfo
+
+# Temporary files
+*.tmp
+*.temp
+
+# Package manager locks (optional - some prefer to keep these)
+# package-lock.json
+# yarn.lock
+# pnpm-lock.yaml
+
+# Chrome extension development
+*.crx
+*.pem
+*.zip
+
+# AI coding tools
+.claude/
+.cursor/
+.copilot/

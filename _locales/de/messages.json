@@ -1,0 +1,22 @@
+{
+  "extName": {
+    "message": "OrangeDuck - Smarte Lesezeichen",
+    "description": "Extension name"
+  },
+  "extShortName": {
+    "message": "OrangeDuck",
+    "description": "Short name for extension (max 12 chars)"
+  },
+  "extDescription": {
+    "message": "KI-Lesezeichen-Manager: Auto-Zusammenfassung, Linkprüfung, Seitenarchiv, semantische Suche, Betrugsschutz.",
+    "description": "Extension description"
+  },
+  "cmdSaveBookmark": {
+    "message": "In OrangeDuck speichern",
+    "description": "Context menu item for saving bookmark"
+  },
+  "cmdOpenManager": {
+    "message": "Lesezeichen-Manager öffnen",
+    "description": "Command to open manager"
+  }
+}

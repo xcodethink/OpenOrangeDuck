@@ -1,0 +1,22 @@
+{
+  "extName": {
+    "message": "OrangeDuck - Dấu Trang Thông Minh",
+    "description": "Extension name"
+  },
+  "extShortName": {
+    "message": "OrangeDuck",
+    "description": "Short name for extension (max 12 chars)"
+  },
+  "extDescription": {
+    "message": "Trình quản lý dấu trang AI: tóm tắt tự động, phát hiện liên kết hỏng, chụp trang, tìm kiếm ngữ nghĩa, chống lừa đảo.",
+    "description": "Extension description"
+  },
+  "cmdSaveBookmark": {
+    "message": "Lưu vào OrangeDuck",
+    "description": "Context menu item for saving bookmark"
+  },
+  "cmdOpenManager": {
+    "message": "Mở trình quản lý dấu trang",
+    "description": "Command to open manager"
+  }
+}

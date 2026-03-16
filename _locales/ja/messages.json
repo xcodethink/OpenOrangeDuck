@@ -1,0 +1,22 @@
+{
+  "extName": {
+    "message": "OrangeDuck - スマートブックマーク",
+    "description": "Extension name"
+  },
+  "extShortName": {
+    "message": "OrangeDuck",
+    "description": "Short name for extension (max 12 chars)"
+  },
+  "extDescription": {
+    "message": "AIブックマーク管理：自動要約、リンク切れ検出、ページスナップショット、セマンティック検索、詐欺対策。",
+    "description": "Extension description"
+  },
+  "cmdSaveBookmark": {
+    "message": "OrangeDuckに保存",
+    "description": "Context menu item for saving bookmark"
+  },
+  "cmdOpenManager": {
+    "message": "ブックマーク管理を開く",
+    "description": "Command to open manager"
+  }
+}

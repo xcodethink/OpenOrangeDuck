@@ -1,0 +1,516 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Theme Variables */
+:root {
+  /* Dark theme (default) */
+  --bg-primary: rgb(2, 6, 23);
+  --bg-secondary: rgb(15, 23, 42);
+  --bg-tertiary: rgb(30, 41, 59);
+  --bg-card: rgba(30, 41, 59, 0.7);
+  --bg-card-hover: rgba(51, 65, 85, 0.8);
+  --bg-input: rgb(30, 41, 59);
+
+  --text-primary: rgb(255, 255, 255);
+  --text-secondary: rgb(203, 213, 225);
+  --text-tertiary: rgb(148, 163, 184);
+  --text-muted: rgb(100, 116, 139);
+
+  --border-primary: rgb(51, 65, 85);
+  --border-secondary: rgba(51, 65, 85, 0.5);
+
+  --accent-primary: rgb(139, 92, 246);
+  --accent-secondary: rgba(139, 92, 246, 0.4);
+
+  --scrollbar-track: rgb(30, 41, 59);
+  --scrollbar-thumb: rgb(71, 85, 105);
+  --scrollbar-thumb-hover: rgb(100, 116, 139);
+
+  --radius-xs: 8px;
+  --radius-sm: 10px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.2);
+  --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.25);
+  --shadow-md: 0 12px 24px rgba(0, 0, 0, 0.35);
+}
+
+/* Light theme */
+.light {
+  --bg-primary: rgb(249, 250, 251);
+  --bg-secondary: rgb(255, 255, 255);
+  --bg-tertiary: rgb(243, 244, 246);
+  --bg-card: rgba(255, 255, 255, 0.9);
+  --bg-card-hover: rgba(243, 244, 246, 0.9);
+  --bg-input: rgb(255, 255, 255);
+
+  --text-primary: rgb(17, 24, 39);
+  --text-secondary: rgb(55, 65, 81);
+  --text-tertiary: rgb(107, 114, 128);
+  --text-muted: rgb(156, 163, 175);
+
+  --border-primary: rgb(229, 231, 235);
+  --border-secondary: rgba(229, 231, 235, 0.5);
+
+  --accent-primary: rgb(124, 58, 237);
+  --accent-secondary: rgba(124, 58, 237, 0.15);
+
+  --scrollbar-track: rgb(243, 244, 246);
+  --scrollbar-thumb: rgb(209, 213, 219);
+  --scrollbar-thumb-hover: rgb(156, 163, 175);
+}
+
+* {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* SaaS UI primitives */
+.sb-page {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+.sb-surface {
+  background-color: var(--bg-secondary);
+}
+
+.sb-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-secondary);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-xs);
+}
+
+.sb-card-hover:hover {
+  background-color: var(--bg-card-hover);
+}
+
+.sb-input {
+  background-color: var(--bg-input);
+  border: 1px solid var(--border-secondary);
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+}
+
+.sb-input::placeholder {
+  color: var(--text-muted);
+}
+
+.sb-button {
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-secondary);
+  background-color: var(--bg-tertiary);
+  color: var(--text-secondary);
+  transition: all 0.2s ease;
+}
+
+.sb-button:hover {
+  background-color: var(--bg-card-hover);
+}
+
+.sb-button-primary {
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(139, 92, 246, 0.3);
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.9), rgba(217, 70, 239, 0.9));
+  color: #fff;
+  box-shadow: var(--shadow-sm);
+}
+
+.sb-button-ghost {
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--text-secondary);
+}
+
+.sb-pill {
+  border-radius: 9999px;
+  background-color: rgba(139, 92, 246, 0.12);
+  color: rgb(199, 168, 255);
+}
+
+.sb-divider {
+  border-color: var(--border-secondary);
+}
+
+.sb-muted {
+  color: var(--text-muted);
+}
+
+.sb-secondary {
+  color: var(--text-secondary);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--scrollbar-track);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-thumb-hover);
+}
+
+/* Line clamp utility */
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Feature button styles */
+.feature-button {
+  cursor: pointer !important;
+  position: relative;
+  z-index: 10;
+  transition: all 0.2s ease;
+}
+
+.feature-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.feature-button:active {
+  transform: translateY(0);
+}
+
+/* Theme-aware utility classes */
+.theme-bg-primary {
+  background-color: var(--bg-primary);
+}
+
+.theme-bg-secondary {
+  background-color: var(--bg-secondary);
+}
+
+.theme-bg-tertiary {
+  background-color: var(--bg-tertiary);
+}
+
+.theme-bg-card {
+  background-color: var(--bg-card);
+}
+
+.theme-bg-card-hover:hover {
+  background-color: var(--bg-card-hover);
+}
+
+.theme-text-primary {
+  color: var(--text-primary);
+}
+
+.theme-text-secondary {
+  color: var(--text-secondary);
+}
+
+.theme-text-tertiary {
+  color: var(--text-tertiary);
+}
+
+.theme-text-muted {
+  color: var(--text-muted);
+}
+
+.theme-border {
+  border-color: var(--border-primary);
+}
+
+.theme-border-secondary {
+  border-color: var(--border-secondary);
+}
+
+/* Light theme specific overrides */
+
+/* Backgrounds */
+.light .bg-slate-950 {
+  background-color: var(--bg-primary);
+}
+
+.light .bg-slate-900 {
+  background-color: var(--bg-secondary);
+}
+
+.light .bg-slate-900\/50 {
+  background-color: rgba(255, 255, 255, 0.95);
+}
+
+.light .bg-slate-800 {
+  background-color: var(--bg-tertiary);
+}
+
+.light .bg-slate-800\/70 {
+  background-color: var(--bg-card);
+}
+
+.light .bg-slate-800\/50 {
+  background-color: rgba(243, 244, 246, 0.8);
+}
+
+.light .bg-slate-800\/80 {
+  background-color: rgba(243, 244, 246, 0.9);
+}
+
+.light .bg-slate-700 {
+  background-color: rgb(229, 231, 235);
+}
+
+.light .bg-slate-700\/50 {
+  background-color: rgba(229, 231, 235, 0.5);
+}
+
+.light .bg-slate-700\/80 {
+  background-color: rgba(229, 231, 235, 0.8);
+}
+
+.light .bg-slate-600 {
+  background-color: rgb(209, 213, 219);
+}
+
+.light .bg-slate-600\/50 {
+  background-color: rgba(209, 213, 219, 0.5);
+}
+
+/* Hover backgrounds */
+.light .hover\:bg-slate-700:hover {
+  background-color: rgb(229, 231, 235);
+}
+
+.light .hover\:bg-slate-700\/50:hover {
+  background-color: rgba(229, 231, 235, 0.7);
+}
+
+.light .hover\:bg-slate-700\/80:hover {
+  background-color: rgba(229, 231, 235, 0.8);
+}
+
+.light .hover\:bg-slate-600:hover {
+  background-color: rgb(209, 213, 219);
+}
+
+.light .hover\:bg-slate-600\/50:hover {
+  background-color: rgba(209, 213, 219, 0.5);
+}
+
+/* Text colors */
+.light .text-white {
+  color: var(--text-primary);
+}
+
+.light .text-slate-100 {
+  color: var(--text-primary);
+}
+
+.light .text-slate-200 {
+  color: var(--text-secondary);
+}
+
+.light .text-slate-300 {
+  color: var(--text-secondary);
+}
+
+.light .text-slate-400 {
+  color: var(--text-tertiary);
+}
+
+.light .text-slate-500 {
+  color: var(--text-muted);
+}
+
+/* Hover text */
+.light .hover\:text-white:hover {
+  color: var(--text-primary);
+}
+
+/* Borders */
+.light .border-slate-700 {
+  border-color: var(--border-primary);
+}
+
+.light .border-slate-700\/50 {
+  border-color: var(--border-secondary);
+}
+
+.light .border-slate-600 {
+  border-color: rgb(209, 213, 219);
+}
+
+.light .border-l-slate-700 {
+  border-left-color: var(--border-primary);
+}
+
+.light .border-r-slate-700 {
+  border-right-color: var(--border-primary);
+}
+
+.light .border-t-slate-700 {
+  border-top-color: var(--border-primary);
+}
+
+.light .border-b-slate-700 {
+  border-bottom-color: var(--border-primary);
+}
+
+/* Rings */
+.light .ring-slate-700 {
+  --tw-ring-color: var(--border-primary);
+}
+
+/* Violet accent adjustments for light theme */
+.light .bg-violet-600\/40 {
+  background-color: rgba(124, 58, 237, 0.15);
+}
+
+.light .bg-violet-600\/30 {
+  background-color: rgba(124, 58, 237, 0.12);
+}
+
+.light .bg-violet-600\/20 {
+  background-color: rgba(124, 58, 237, 0.1);
+}
+
+.light .bg-violet-500\/30 {
+  background-color: rgba(139, 92, 246, 0.15);
+}
+
+.light .bg-violet-500\/20 {
+  background-color: rgba(139, 92, 246, 0.1);
+}
+
+.light .text-violet-300 {
+  color: rgb(109, 40, 217);
+}
+
+.light .text-violet-400 {
+  color: rgb(124, 58, 237);
+}
+
+/* Light theme input styles */
+.light input,
+.light textarea,
+.light select {
+  background-color: var(--bg-input);
+  border-color: var(--border-primary);
+  color: var(--text-primary);
+}
+
+.light input::placeholder,
+.light textarea::placeholder {
+  color: var(--text-muted);
+}
+
+/* Light theme shadows */
+.light .shadow-lg {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+}
+
+.light .feature-button:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Colored backgrounds adjustments for light theme */
+.light .bg-emerald-500\/20 {
+  background-color: rgba(16, 185, 129, 0.15);
+}
+
+.light .bg-blue-500\/20 {
+  background-color: rgba(59, 130, 246, 0.15);
+}
+
+.light .text-emerald-300 {
+  color: rgb(5, 150, 105);
+}
+
+.light .text-emerald-400 {
+  color: rgb(16, 185, 129);
+}
+
+.light .text-blue-300 {
+  color: rgb(37, 99, 235);
+}
+
+.light .text-blue-400 {
+  color: rgb(59, 130, 246);
+}
+
+/* Status and tag backgrounds */
+.light .bg-green-500\/20 {
+  background-color: rgba(34, 197, 94, 0.15);
+}
+
+.light .bg-red-500\/20 {
+  background-color: rgba(239, 68, 68, 0.15);
+}
+
+.light .bg-yellow-500\/20 {
+  background-color: rgba(234, 179, 8, 0.15);
+}
+
+.light .text-green-300 {
+  color: rgb(22, 163, 74);
+}
+
+.light .text-red-300 {
+  color: rgb(220, 38, 38);
+}
+
+.light .text-yellow-300 {
+  color: rgb(202, 138, 4);
+}
+
+/* Violet buttons in light theme - keep white text for contrast */
+.light .bg-violet-600 {
+  background-color: rgb(124, 58, 237);
+}
+
+.light .bg-violet-600:hover,
+.light .hover\:bg-violet-500:hover {
+  background-color: rgb(139, 92, 246);
+}
+
+.light .bg-violet-600 .text-white,
+.light .bg-violet-600 span,
+.light .bg-violet-600 {
+  color: rgb(255, 255, 255);
+}
+
+/* Ensure buttons with bg-violet-600 have white text in light theme */
+.light button.bg-violet-600,
+.light .bg-violet-600 {
+  color: rgb(255, 255, 255) !important;
+}
+
+/* Slate buttons in light theme */
+.light .bg-slate-700:hover,
+.light .hover\:bg-slate-600:hover {
+  background-color: rgb(209, 213, 219);
+}

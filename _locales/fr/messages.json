@@ -1,0 +1,22 @@
+{
+  "extName": {
+    "message": "OrangeDuck - Signets Intelligents",
+    "description": "Extension name"
+  },
+  "extShortName": {
+    "message": "OrangeDuck",
+    "description": "Short name for extension (max 12 chars)"
+  },
+  "extDescription": {
+    "message": "Gestionnaire de signets IA : résumé auto, détection de liens morts, captures de page, recherche sémantique, protection anti-arnaque.",
+    "description": "Extension description"
+  },
+  "cmdSaveBookmark": {
+    "message": "Enregistrer dans OrangeDuck",
+    "description": "Context menu item for saving bookmark"
+  },
+  "cmdOpenManager": {
+    "message": "Ouvrir le gestionnaire de signets",
+    "description": "Command to open manager"
+  }
+}

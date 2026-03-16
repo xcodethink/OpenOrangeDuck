@@ -1,0 +1,22 @@
+{
+  "extName": {
+    "message": "OrangeDuck - 스마트 북마크",
+    "description": "Extension name"
+  },
+  "extShortName": {
+    "message": "OrangeDuck",
+    "description": "Short name for extension (max 12 chars)"
+  },
+  "extDescription": {
+    "message": "AI 북마크 관리자: 자동 요약, 데드링크 감지, 페이지 스냅샷, 시맨틱 검색, 사기 방지.",
+    "description": "Extension description"
+  },
+  "cmdSaveBookmark": {
+    "message": "OrangeDuck에 저장",
+    "description": "Context menu item for saving bookmark"
+  },
+  "cmdOpenManager": {
+    "message": "북마크 관리자 열기",
+    "description": "Command to open manager"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "extName": {
+    "message": "OrangeDuck - 智能收藏夹",
+    "description": "Extension name"
+  },
+  "extShortName": {
+    "message": "OrangeDuck",
+    "description": "Short name for extension (max 12 chars)"
+  },
+  "extDescription": {
+    "message": "AI 智能书签管理器：自动摘要、死链检测、页面快照、语义搜索、诈骗防护。",
+    "description": "Extension description"
+  },
+  "cmdSaveBookmark": {
+    "message": "收藏到 OrangeDuck",
+    "description": "Context menu item for saving bookmark"
+  },
+  "cmdOpenManager": {
+    "message": "打开收藏夹管理",
+    "description": "Command to open manager"
+  }
+}

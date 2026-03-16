@@ -1,0 +1,22 @@
+{
+  "extName": {
+    "message": "OrangeDuck - Marcadores Inteligentes",
+    "description": "Extension name"
+  },
+  "extShortName": {
+    "message": "OrangeDuck",
+    "description": "Short name for extension (max 12 chars)"
+  },
+  "extDescription": {
+    "message": "Gerenciador de marcadores com IA: resumo automático, detecção de links quebrados, capturas de página, busca semântica, proteção antifraude.",
+    "description": "Extension description"
+  },
+  "cmdSaveBookmark": {
+    "message": "Salvar no OrangeDuck",
+    "description": "Context menu item for saving bookmark"
+  },
+  "cmdOpenManager": {
+    "message": "Abrir gerenciador de marcadores",
+    "description": "Command to open manager"
+  }
+}
