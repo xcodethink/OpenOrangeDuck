@@ -1,7 +1,7 @@
 {
   "extName": "OrangeDuck",
   "extDescription": "AI 智能书签管理器 — 保存、整理、保护您的网络收藏",
-  "cmdSaveBookmark": "收藏当前页面到OrangeDuck",
+  "cmdSaveBookmark": "收藏当前页面到 OrangeDuck",
   "cmdOpenManager": "打开收藏夹管理",
 
   "sidebar": {
@@ -71,11 +71,20 @@
   "card": {
     "mainSite": "主网站",
     "savedUrl": "收藏网址",
-    "aiSummary": "AI智能摘要",
+    "aiSummary": "AI 智能摘要",
     "sameSite": "同站 {{count}} 个",
     "viewSameSite": "查看同站收藏",
     "visit": "访问",
     "noSummary": "无摘要"
+  },
+
+  "healthCheck": {
+    "progress": "正在检测 {{checked}}/{{total}}...",
+    "retrying": "正在重试失败链接...",
+    "resultTitle": "健康检测完成",
+    "resultSummary": "共检测 {{total}} 个 — {{healthy}} 个正常，{{dead}} 个失联",
+    "allHealthy": "全部 {{total}} 个收藏均正常！",
+    "dismiss": "关闭"
   },
 
   "stats": {
@@ -116,7 +125,7 @@
   },
 
   "popup": {
-    "title": "收藏到OrangeDuck",
+    "title": "收藏到 OrangeDuck",
     "saving": "保存中...",
     "saved": "已保存!",
     "error": "保存失败",
@@ -130,7 +139,7 @@
 
   "options": {
     "title": "设置",
-    "subtitle": "OrangeDuck配置",
+    "subtitle": "OrangeDuck 配置",
     "subtitleGeneric": "个性化你的 AI 助手",
     "backToHome": "返回工作台",
     "show": "显示",
@@ -151,15 +160,20 @@
     "usageThisMonth": "本月 AI 用量",
     "planMonth": "月",
     "planUnlimited": "无限制",
+    "planCredits": "购买积分使用 AI",
     "planFeatures": "计划权益",
     "aiAnalysesPerMonth": "次 AI 分析/月",
+    "creditsPerMonth": "积分/月",
+    "creditDiscount": "积分购买折扣",
     "featureBasicScan": "基础域名安全扫描",
     "featureCommunity": "社区举报与投票",
+    "featureBuyCredits": "按标准价购买积分",
     "featureCloudSync": "端到端加密云同步",
     "featurePriority": "优先客服支持",
     "featureUnlimitedAI": "无限 AI 分析次数",
     "featureBYOK": "自带 API Key (BYOK)",
     "featureAllPro": "包含所有 Pro 功能",
+    "viewCredits": "查看积分与定价",
     "bestModelIncluded": "所有计划均使用最强模型",
     "aiEngine": "AI 智能引擎",
     "aiReady": "AI 已就绪",
@@ -271,11 +285,11 @@
   "dedupe": {
     "title": "书签分析",
     "initialTitle": "书签分析工具",
-    "initialDesc": "智能扫描您的书签库，检测重复URL、相似内容和关联站点，帮助您整理收藏。",
+    "initialDesc": "智能扫描您的书签库，检测重复 URL、相似内容和关联站点，帮助您整理收藏。",
     "startAnalysis": "开始分析",
     "reAnalysis": "重新分析",
     "analyzing": "正在分析...",
-    "scanningDuplicates": "扫描完全重复的URL...",
+    "scanningDuplicates": "扫描完全重复的 URL...",
     "analyzingSimilarity": "分析内容相似度...",
     "discoveringRelated": "发现关联站点...",
     "found": "发现 {{count}} 组",
@@ -283,12 +297,12 @@
     "noResults": "分析完成！您的书签整理得很好。",
     "totalBookmarks": "共 {{count}} 个书签",
     "itemCount": "{{count}} 项",
-    "sameUrl": "完全相同URL",
+    "sameUrl": "完全相同 URL",
     "sameDomain": "相同主域名",
     "similarContent": "内容相似",
     "relatedSites": "关联站点",
     "relatedSitesDesc": "同一品牌/组织的不同地区站点",
-    "checkExact": "检测完全重复的URL收藏",
+    "checkExact": "检测完全重复的 URL 收藏",
     "checkSimilar": "分析网页内容的相似程度",
     "checkRelated": "发现同一组织的不同地区站点",
     "infoOnly": "仅供参考",
@@ -309,7 +323,7 @@
     "shortcuts": "快捷键",
     "snapshotLevels": "快照级别",
     "step1Title": "收藏网页",
-    "step1Desc": "右键点击网页选择「收藏到OrangeDuck」，或使用快捷键 Ctrl+Shift+S",
+    "step1Desc": "右键点击网页选择「收藏到 OrangeDuck」，或按 Ctrl+Shift+S（Mac 上 Cmd+Shift+S）",
     "step2Title": "AI 智能处理",
     "step2Desc": "自动提取正文、生成 AI 摘要和标签、创建网页快照备份",
     "step3Title": "搜索",
@@ -353,7 +367,7 @@
     "fromChrome": "从 Chrome 导入",
     "fromChromeDesc": "导入浏览器书签栏中的所有书签",
     "fromSafari": "从 Safari 导入",
-    "fromSafariDesc": "在 Safari 中选择 文件 → 导出书签，然后选择导出的 HTML 文件",
+    "fromSafariDesc": "在 Safari 中点击「文件」→「导出书签」，然后选择导出的 HTML 文件",
     "fromFile": "从文件导入",
     "fromFileDesc": "支持 HTML 或 JSON 格式的书签文件",
     "success": "导入成功！已导入 {{imported}} 条，跳过 {{skipped}} 条重复",
@@ -420,7 +434,7 @@
     "bookmarks": {
       "title": "还没有收藏",
       "description": "开始收藏你喜欢的网页吧！",
-      "tip1": "右键网页选择「收藏到OrangeDuck」",
+      "tip1": "右键网页选择「收藏到 OrangeDuck」",
       "tip2": "使用快捷键 Ctrl+Shift+S 快速收藏",
       "tip3": "或者点击下方按钮导入现有书签"
     },
@@ -552,7 +566,7 @@
   },
 
   "translate": {
-    "translateTo": "翻译为{{lang}}",
+    "translateTo": "翻译为 {{lang}}",
     "translating": "翻译中...",
     "showOriginal": "查看原文",
     "error": "翻译失败，请检查 AI 配置"
@@ -670,8 +684,8 @@
   },
 
   "welcome": {
-    "title": "欢迎使用OrangeDuck",
-    "subtitle": "AI 驱动的书签管理器，为您的网络收藏保驾护航。",
+    "title": "欢迎使用 OrangeDuck",
+    "subtitle": "AI 驱动的智能书签管理器，让收藏更高效、更安全。",
     "feature_aiSummary": "AI 摘要",
     "feature_aiSummary_desc": "自动为每个书签生成摘要和标签。",
     "feature_healthCheck": "健康检查",
@@ -682,10 +696,15 @@
     "feature_semanticSearch_desc": "通过语义而非关键词搜索书签。",
     "getStarted": "开始使用",
     "readyTitle": "一切就绪！",
-    "readyDesc": "创建免费账户即可解锁 AI 功能和云同步，或直接开始浏览。",
-    "signUpFree": "免费注册",
-    "skipToManager": "进入书签管理",
+    "readyDesc": "注册账户可解锁更多 AI 次数和云端同步，每天免费使用 20 次 AI 功能。",
+    "signUpFree": "免费开通 AI 功能",
+    "skipToManager": "先逛逛，稍后注册",
     "tipShortcut": "提示：使用 Ctrl+Shift+S（Mac 上 Cmd+Shift+S）即可快速保存任何页面。"
+  },
+
+  "tour": {
+    "next": "下一步",
+    "done": "开始使用"
   },
 
   "warning": {
@@ -700,8 +719,8 @@
     "viewDetails": "查看完整报告",
     "report": "举报此网站",
     "proceedAnyway": "我了解风险 — 继续访问",
-    "proceedCountdown": "继续访问 ({{count}}秒)",
-    "footer": "OrangeDuck 使用 19+ 威胁情报源保护您免受钓鱼、诈骗和恶意软件的侵害。",
+    "proceedCountdown": "继续访问（{{count}} 秒）",
+    "footer": "OrangeDuck 使用 90+ 威胁情报源保护您免受钓鱼、诈骗和恶意软件的侵害。",
     "addToWhitelist": "信任此网站",
     "addToWhitelistConfirm": "确定要信任 {domain} 吗？加入白名单后将不再触发安全警告。",
     "confirmWhitelist": "确定信任",

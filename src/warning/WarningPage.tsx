@@ -76,11 +76,11 @@ export default function WarningPage() {
   const handleProceed = () => {
     if (!threatInfo?.url || !canProceed) return;
     // Store bypass so we don't warn again for this domain in this session
-    chrome.storage.session.get('orangeduck_bypassed', (result) => {
-      const bypassed: string[] = result.orangeduck_bypassed || [];
+    chrome.storage.session.get('scamlens_bypassed', (result) => {
+      const bypassed: string[] = result.scamlens_bypassed || [];
       if (!bypassed.includes(threatInfo.domain)) {
         bypassed.push(threatInfo.domain);
-        chrome.storage.session.set({ orangeduck_bypassed: bypassed });
+        chrome.storage.session.set({ scamlens_bypassed: bypassed });
       }
       window.location.href = threatInfo.url;
     });
@@ -88,14 +88,13 @@ export default function WarningPage() {
 
   const handleReport = () => {
     if (!threatInfo?.domain) return;
-    // TODO: Replace with your own report page URL
-    const reportUrl = `https://your-site.example.com/report?domain=${encodeURIComponent(threatInfo.domain)}`;
+    const reportUrl = `https://scamlens.org/en/report?domain=${encodeURIComponent(threatInfo.domain)}`;
     window.open(reportUrl, '_blank', 'noopener,noreferrer');
   };
 
   const handleViewDetails = () => {
     if (!threatInfo?.domain) return;
-    const detailsUrl = `https://your-site.example.com/report/${encodeURIComponent(threatInfo.domain)}`;
+    const detailsUrl = `https://scamlens.org/en/report/${encodeURIComponent(threatInfo.domain)}`;
     window.open(detailsUrl, '_blank', 'noopener,noreferrer');
   };
 
@@ -153,7 +152,7 @@ export default function WarningPage() {
               : (t('warning.suspiciousTitle', 'Suspicious Website Detected'))}
           </h1>
           <p className="text-gray-400 mt-2 text-sm">
-            {t('warning.poweredBy', 'Protected by OrangeDuck — AI-powered threat intelligence')}
+            {t('warning.poweredBy', 'Protected by ScamLens — AI-powered threat intelligence')}
           </p>
         </div>
 
@@ -272,7 +271,7 @@ export default function WarningPage() {
         {/* Footer with disable tip */}
         <div className="text-center space-y-1">
           <p className="text-xs text-gray-600">
-            {t('warning.footer', 'OrangeDuck uses 19+ threat intelligence sources to protect you from phishing, scams, and malware.')}
+            {t('warning.footer', 'ScamLens uses 90+ threat intelligence sources to protect you from phishing, scams, and malware.')}
           </p>
           <p className="text-xs text-gray-600">
             {t('warning.disableTip', 'You can disable real-time protection in')}{' '}

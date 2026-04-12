@@ -33,6 +33,7 @@ export default function Auth() {
   const [name, setName] = useState('');
   const [verificationCode, setVerificationCode] = useState('');
   const [referralCode, setReferralCode] = useState('');
+  const [newsletterOptIn, setNewsletterOptIn] = useState(true);
   const [resetCode, setResetCode] = useState('');
   const [newPassword, setNewPassword] = useState('');
 
@@ -91,6 +92,16 @@ export default function Auth() {
 
     try {
       await authService.verifyEmail({ email, code: verificationCode });
+      // Fire-and-forget newsletter subscription after successful verification
+      if (newsletterOptIn) {
+        const settings = await storageService.getSettings();
+        const baseUrl = settings.proxyEndpoint.replace(/\/+$/, '');
+        fetch(`${baseUrl}/v1/public/newsletter/subscribe`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, locale: i18n.language || 'en', source: 'registration' }),
+        }).catch(() => {/* non-blocking */});
+      }
       setStep('success');
       setTimeout(() => {
         window.close();
@@ -475,6 +486,20 @@ export default function Auth() {
               </div>
             )}
 
+            {mode === 'register' && (
+              <label className="flex items-start gap-2 cursor-pointer">
+                <input
+                  type="checkbox"
+                  checked={newsletterOptIn}
+                  onChange={(e) => setNewsletterOptIn(e.target.checked)}
+                  className="mt-0.5 h-4 w-4 rounded border-[var(--border)] accent-violet-500"
+                />
+                <span className="text-xs sb-muted leading-snug">
+                  {i18n.language === 'zh' ? '订阅安全更新和诈骗提醒' : 'Subscribe to security updates and scam alerts'}
+                </span>
+              </label>
+            )}
+
             {mode === 'login' && (
               <div className="text-right">
                 <button
@@ -535,9 +560,9 @@ export default function Auth() {
         <div className="mt-8 text-center text-xs sb-muted">
           <p>
             {t('auth.termsNotice')}
-            <a href="https://your-site.example.com/terms" target="_blank" rel="noopener noreferrer" className="text-violet-400 hover:underline">{t('auth.termsLink')}</a>
+            <a href="https://scamlens.org/en/terms" target="_blank" rel="noopener noreferrer" className="text-violet-400 hover:underline">{t('auth.termsLink')}</a>
             {t('auth.and')}
-            <a href="https://your-site.example.com/privacy" target="_blank" rel="noopener noreferrer" className="text-violet-400 hover:underline">{t('auth.privacyLink')}</a>
+            <a href="https://scamlens.org/en/privacy" target="_blank" rel="noopener noreferrer" className="text-violet-400 hover:underline">{t('auth.privacyLink')}</a>
           </p>
         </div>
       </div>

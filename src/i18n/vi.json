@@ -78,6 +78,15 @@
     "noSummary": "Không có tóm tắt"
   },
 
+  "healthCheck": {
+    "progress": "Đang kiểm tra {{checked}}/{{total}}...",
+    "retrying": "Đang thử lại liên kết lỗi...",
+    "resultTitle": "Kiểm tra hoàn tất",
+    "resultSummary": "{{total}} đã kiểm tra — {{healthy}} hoạt động, {{dead}} ngoại tuyến",
+    "allHealthy": "Tất cả {{total}} dấu trang đều hoạt động!",
+    "dismiss": "Đóng"
+  },
+
   "stats": {
     "total": "{{count}} dấu trang",
     "healthy": "Hoạt động",
@@ -309,7 +318,7 @@
     "shortcuts": "Phím tắt",
     "snapshotLevels": "Cấp độ sao lưu",
     "step1Title": "Lưu trang",
-    "step1Desc": "Nhấp chuột phải vào trang web và chọn \"Lưu vào OrangeDuck\" hoặc dùng Ctrl+Shift+S",
+    "step1Desc": "Nhấp chuột phải vào trang web và chọn \"Lưu vào OrangeDuck\", hoặc nhấn Ctrl+Shift+S (Cmd+Shift+S trên Mac)",
     "step2Title": "Xử lý AI",
     "step2Desc": "Tự động trích xuất nội dung, tạo tóm tắt & thẻ AI, tạo bản sao lưu trang web",
     "step3Title": "Tìm kiếm",
@@ -323,7 +332,7 @@
     "step7Title": "Nhập & Xuất",
     "step7Desc": "Nhập từ Chrome/Safari, xuất dưới dạng HTML hoặc JSON",
     "step8Title": "Kiểm tra sức khỏe",
-    "step8Desc": "Định kỳ kiểm tra liên kết, khôi phục từ bản sao lưu",
+    "step8Desc": "Định kỳ kiểm tra liên kết còn hoạt động không — khôi phục nội dung từ bản sao lưu",
     "step9Title": "Loại bỏ trùng lặp",
     "step9Desc": "Tự động phát hiện dấu trang trùng lặp, gộp hoặc xóa hàng loạt",
     "step10Title": "Thao tác hàng loạt",
@@ -682,10 +691,15 @@
     "feature_semanticSearch_desc": "Tìm dấu trang theo ý nghĩa, không chỉ từ khóa.",
     "getStarted": "Bắt đầu",
     "readyTitle": "Đã sẵn sàng!",
-    "readyDesc": "Tạo tài khoản miễn phí để mở khóa AI và đồng bộ đám mây, hoặc bắt đầu ngay.",
-    "signUpFree": "Đăng ký miễn phí",
-    "skipToManager": "Đến trình quản lý",
+    "readyDesc": "Đăng ký để mở khóa thêm lượt AI và đồng bộ đám mây — 20 lượt AI miễn phí mỗi ngày.",
+    "signUpFree": "Mở khóa AI — Miễn phí",
+    "skipToManager": "Bỏ qua",
     "tipShortcut": "Mẹo: Dùng Ctrl+Shift+S (Cmd+Shift+S trên Mac) để lưu trang ngay lập tức."
+  },
+
+  "tour": {
+    "next": "Tiếp theo",
+    "done": "Bắt đầu!"
   },
 
   "warning": {
@@ -701,7 +715,7 @@
     "report": "Báo cáo trang này",
     "proceedAnyway": "Tôi hiểu rủi ro — tiếp tục đến trang",
     "proceedCountdown": "Tiếp tục ({{count}}s)",
-    "footer": "OrangeDuck sử dụng hơn 19 nguồn tình báo đe dọa để bảo vệ bạn khỏi lừa đảo, gian lận và phần mềm độc hại.",
+    "footer": "OrangeDuck sử dụng hơn 90 nguồn tình báo đe dọa để bảo vệ bạn khỏi lừa đảo, gian lận và phần mềm độc hại.",
     "addToWhitelist": "Tin tưởng trang web này",
     "addToWhitelistConfirm": "Bạn có chắc muốn tin tưởng {domain}? Trang này sẽ không còn kích hoạt cảnh báo bảo mật.",
     "confirmWhitelist": "Có, tin tưởng",

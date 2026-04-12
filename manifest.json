@@ -64,5 +64,22 @@
   },
   "chrome_url_overrides": {
     "newtab": "src/manager/index.html"
-  }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.etherscan.io/*",
+        "*://*.bscscan.com/*",
+        "*://*.polygonscan.com/*",
+        "*://*.arbiscan.io/*",
+        "*://*.basescan.org/*",
+        "*://*.optimistic.etherscan.io/*",
+        "*://*.snowscan.xyz/*",
+        "*://*.ftmscan.com/*",
+        "*://*.tronscan.org/*"
+      ],
+      "js": ["src/content/riskBadge.ts"],
+      "run_at": "document_idle"
+    }
+  ]
 }

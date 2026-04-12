@@ -78,6 +78,15 @@
     "noSummary": "No summary"
   },
 
+  "healthCheck": {
+    "progress": "Checking {{checked}}/{{total}}...",
+    "retrying": "Retrying failed links...",
+    "resultTitle": "Health Check Complete",
+    "resultSummary": "{{total}} checked — {{healthy}} active, {{dead}} offline",
+    "allHealthy": "All {{total}} bookmarks are active!",
+    "dismiss": "Dismiss"
+  },
+
   "stats": {
     "total": "{{count}} bookmarks",
     "healthy": "Active",
@@ -151,15 +160,20 @@
     "usageThisMonth": "AI usage this month",
     "planMonth": "month",
     "planUnlimited": "Unlimited",
+    "planCredits": "Buy credits to use AI",
     "planFeatures": "Plan Features",
     "aiAnalysesPerMonth": "AI analyses per month",
+    "creditsPerMonth": "credits/month",
+    "creditDiscount": "off credit purchases",
     "featureBasicScan": "Basic domain safety scan",
     "featureCommunity": "Community reports & votes",
+    "featureBuyCredits": "Buy credits at standard rate",
     "featureCloudSync": "E2E encrypted cloud sync",
     "featurePriority": "Priority support",
     "featureUnlimitedAI": "Unlimited AI analyses",
     "featureBYOK": "Bring Your Own API Key (BYOK)",
     "featureAllPro": "All Pro features included",
+    "viewCredits": "View credits & pricing",
     "bestModelIncluded": "Best model included with all plans",
     "aiEngine": "AI Engine",
     "aiReady": "AI Ready",
@@ -309,7 +323,7 @@
     "shortcuts": "Keyboard Shortcuts",
     "snapshotLevels": "Snapshot Levels",
     "step1Title": "Save Pages",
-    "step1Desc": "Right-click any webpage and select \"Save to OrangeDuck\" or use Ctrl+Shift+S",
+    "step1Desc": "Right-click any webpage and select \"Save to OrangeDuck\", or press Ctrl+Shift+S (Cmd+Shift+S on Mac)",
     "step2Title": "AI Processing",
     "step2Desc": "Auto-extracts content, generates AI summary & tags, creates webpage snapshots",
     "step3Title": "Search",
@@ -323,7 +337,7 @@
     "step7Title": "Import & Export",
     "step7Desc": "Import from Chrome/Safari, export as HTML or JSON",
     "step8Title": "Health Check",
-    "step8Desc": "Periodically checks if links are still active, recover from snapshots",
+    "step8Desc": "Periodically checks if links are still active — recover lost content from snapshots",
     "step9Title": "Smart Deduplication",
     "step9Desc": "Auto-detect duplicate bookmarks, batch merge or delete",
     "step10Title": "Batch Operations",
@@ -671,7 +685,7 @@
 
   "welcome": {
     "title": "Welcome to OrangeDuck",
-    "subtitle": "Your AI-powered bookmark manager that saves, organizes, and protects your web.",
+    "subtitle": "Your AI-powered bookmark manager that saves, organizes, and protects your browsing.",
     "feature_aiSummary": "AI Summary",
     "feature_aiSummary_desc": "Automatically generate summaries and tags for every bookmark.",
     "feature_healthCheck": "Health Check",
@@ -682,10 +696,15 @@
     "feature_semanticSearch_desc": "Find bookmarks by meaning, not just keywords.",
     "getStarted": "Get Started",
     "readyTitle": "You're All Set!",
-    "readyDesc": "Create a free account to unlock AI features and cloud sync, or jump straight into browsing.",
-    "signUpFree": "Create Free Account",
-    "skipToManager": "Go to Bookmark Manager",
+    "readyDesc": "Sign up to unlock more AI uses and cloud sync — 20 free AI operations per day.",
+    "signUpFree": "Unlock AI Features — Free",
+    "skipToManager": "Skip for now",
     "tipShortcut": "Tip: Use Ctrl+Shift+S (Cmd+Shift+S on Mac) to save any page instantly."
+  },
+
+  "tour": {
+    "next": "Next",
+    "done": "Let's Go!"
   },
 
   "warning": {
@@ -701,7 +720,7 @@
     "report": "Report This Site",
     "proceedAnyway": "I understand the risks — continue to site",
     "proceedCountdown": "Continue anyway ({{count}}s)",
-    "footer": "OrangeDuck uses 19+ threat intelligence sources to protect you from phishing, scams, and malware.",
+    "footer": "OrangeDuck uses 90+ threat intelligence sources to protect you from phishing, scams, and malware.",
     "addToWhitelist": "Trust This Website",
     "addToWhitelistConfirm": "Are you sure you want to trust {domain}? It will no longer trigger security warnings.",
     "confirmWhitelist": "Yes, Trust It",

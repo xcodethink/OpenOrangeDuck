@@ -18,7 +18,7 @@ export interface AuthResult {
   token: string;
   refreshToken: string;
   expiresIn: number;
-  plan: 'free' | 'pro' | 'power';
+  plan: 'free' | 'pro' | 'power' | 'max';
   user: {
     id: string;
     email: string;
@@ -55,7 +55,7 @@ interface ApiAuthResponse {
     email: string;
     name: string;
     emailVerified: boolean;
-    plan?: 'free' | 'pro' | 'power';
+    plan?: 'free' | 'pro' | 'power' | 'max';
   };
 }
 
@@ -253,9 +253,7 @@ class AuthService {
     return new Promise((resolve, reject) => {
       // chrome.identity.launchWebAuthFlow requires a configured OAuth client
       // The redirect URL is: https://<extension-id>.chromiumapp.org/
-      // TODO: Replace with your own Google OAuth client ID
-      // See: https://console.cloud.google.com/apis/credentials
-      const clientId = 'YOUR_GOOGLE_OAUTH_CLIENT_ID';
+      const clientId = '201908505103-hj7ip6cusf92fhufp37aeri8cr2hcg5a.apps.googleusercontent.com';
       const redirectUrl = chrome.identity.getRedirectURL();
       const authUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${clientId}&response_type=id_token&redirect_uri=${encodeURIComponent(redirectUrl)}&scope=openid%20email%20profile&nonce=${crypto.randomUUID()}`;
 
@@ -325,7 +323,7 @@ class AuthService {
   async refreshSubscription(): Promise<{ plan: string; aiUsageThisMonth: number }> {
     try {
       const data = await apiClient.get<{ plan: string; usage?: { ai_bookmarks_used?: number } }>('/subscription');
-      const plan = (data.plan || 'free') as 'free' | 'pro' | 'power';
+      const plan = (data.plan || 'free') as 'free' | 'pro' | 'power' | 'max';
       const aiUsage = data.usage?.ai_bookmarks_used ?? 0;
       await storageService.saveSettings({ plan, aiUsageThisMonth: aiUsage });
       return { plan, aiUsageThisMonth: aiUsage };

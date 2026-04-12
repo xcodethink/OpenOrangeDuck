@@ -1,134 +1,122 @@
-# OrangeDuck - Smart Bookmarks
+# ScamLens Smart Bookmarks
 
-**AI-Powered Bookmark Manager Chrome Extension**
+**AI-Powered Bookmark Manager & Domain Safety Checker**
 
-An open-source Chrome extension that combines intelligent bookmark management with AI-powered features. Supports multiple AI providers (Claude, OpenAI, Gemini, Grok) for smart summarization, classification, and search.
+A Chrome extension that combines intelligent bookmark management with real-time domain safety analysis. Part of the [ScamLens](https://scamlens.org) security platform.
+
+智能收藏夹 — AI 书签管理 + 域名安全检测 Chrome 扩展，[ScamLens](https://scamlens.org) 安全平台的一部分。
 
 ## Features
 
-- **AI Summary** -- Auto-generate summaries via Claude, OpenAI, Gemini, Grok, or custom API
-- **Semantic Search** -- Search by meaning, not just keywords
-- **Page Snapshots** -- Save page content (3 levels: text / images / full HTML)
-- **Health Check** -- Detect dead links; view snapshots of offline pages
-- **Smart Deduplication** -- Same URL / same domain / similar content detection
-- **Auto Classify** -- AI-powered folder organization
-- **Timeline View** -- Browse bookmarks chronologically
-- **Tag Manager** -- Auto-generated tags with merge & rename
-- **Domain Safety Check** -- Real-time phishing & scam detection (requires backend API)
-- **Import / Export** -- Chrome bookmarks, HTML, JSON
-- **Multi-language** -- English, Chinese, Vietnamese + 9 more locales
-- **Cloud Backup** -- End-to-end encrypted sync (requires backend API)
+- **Domain Safety Check** — Real-time phishing, scam & malware detection powered by multi-source threat intelligence
+- **AI Summary** — Auto-generate summaries via Claude, OpenAI, Gemini, Grok, or custom API
+- **Semantic Search** — Search by meaning, not just keywords
+- **Page Snapshots** — Save page content (3 levels: text / images / full HTML)
+- **Health Check** — Detect dead links; view snapshots of offline pages
+- **Smart Deduplication** — Same URL / same domain / similar content detection
+- **Auto Classify** — AI-powered folder organization
+- **Timeline View** — Browse bookmarks chronologically
+- **Tag Manager** — Auto-generated tags with merge & rename
+- **Import / Export** — Chrome bookmarks, HTML, JSON
+- **Multi-language** — English, 中文, Tiếng Việt + 9 more locales
 
-## Getting Started
+## Installation
 
-### Prerequisites
+### From Chrome Web Store
 
-- Node.js 20+
-- npm
-
-### Installation
-
-```bash
-git clone https://github.com/xcodethink/OpenOrangeDuck.git
-cd OrangeDuck
-npm install
-```
+Install directly from the [Chrome Web Store](https://scamlens.org/en/extension).
 
 ### Development
 
-```bash
-npm run dev    # Development with hot reload
-```
+1. Clone the repository and install dependencies:
+   ```bash
+   git clone https://github.com/xcodethink/OpenOrangeDuck.git
+   cd OpenOrangeDuck
+   npm install
+   ```
 
-### Build
+2. Build the extension:
+   ```bash
+   npm run dev    # Development with hot reload
+   # or
+   npm run build  # Production build
+   ```
 
-```bash
-npm run build  # Production build
-```
-
-### Load in Chrome
-
-1. Open `chrome://extensions/`
-2. Enable "Developer mode"
-3. Click "Load unpacked"
-4. Select the `dist` folder
+3. Load in Chrome:
+   - Open `chrome://extensions/`
+   - Enable "Developer mode"
+   - Click "Load unpacked"
+   - Select the `dist` folder
 
 ## Configuration
 
 Two modes are available:
 
-1. **Own API Key (recommended for self-hosting)** -- Bring your own key from any supported provider (Claude, OpenAI, Gemini, Grok, or custom endpoint). Configure in Settings page.
-2. **Proxy Mode** -- Point to your own backend API for centralized billing and user management. See [Backend Setup](#backend-setup) below.
+1. **Official Proxy (recommended)** — Pay-as-you-go, no API key needed. Sign in and recharge in Settings.
+2. **Own API Key** — Bring your own key from any supported provider (Claude, OpenAI, Gemini, Grok, or custom endpoint).
 
-## Backend Setup
+## Usage
 
-Some features (cloud backup, domain safety check, proxy mode) require a backend API. You need to:
+### Save a Bookmark
 
-1. Set up your own API server (e.g., Cloudflare Workers, Node.js, etc.)
-2. Update `DEFAULT_PROXY_ENDPOINT` in `src/types/settings.ts`
-3. Update the safety check API in `src/services/safetyCheck.ts`
-4. Set your Google OAuth client ID in `src/services/auth.ts` (for Google sign-in)
+- **Right-click** on any webpage → "Save to Smart Bookmarks"
+- **Keyboard shortcut**: `Ctrl+Shift+S` (Mac: `Cmd+Shift+S`)
+- **Click** the extension icon in toolbar
 
-The extension works fully offline for core bookmark management features without a backend.
+### Open Manager
+
+- **Keyboard shortcut**: `Ctrl+Shift+B` (Mac: `Cmd+Shift+B`)
+- New tab page will show the manager automatically
+
+### Semantic Search
+
+Enter keywords in the search bar. The semantic search will expand your query:
+- "AI" → matches "artificial intelligence", "machine learning", "GPT", etc.
+- "前端框架" → matches "React", "Vue", "Angular", etc.
 
 ## Tech Stack
 
-- React 18 + TypeScript
+- React 19 + TypeScript
 - Tailwind CSS
 - Zustand (State Management)
 - Dexie.js (IndexedDB)
-- Vite + CRXJS (Chrome Extension Build)
-- i18next (Internationalization)
+- Vite (Build)
+- i18next (i18n)
 
 ## Project Structure
 
 ```
-OrangeDuck/
 ├── manifest.json          # Chrome Extension Manifest V3
 ├── icons/                 # Extension icons (SVG + PNG)
-├── _locales/              # Chrome i18n (10 languages)
+├── _locales/              # Chrome i18n
 ├── src/
 │   ├── background/        # Service Worker
-│   ├── content/           # Content Script (page extraction)
+│   ├── content/           # Content Script
 │   ├── popup/             # Popup UI
 │   ├── options/           # Settings page
 │   ├── manager/           # Main manager UI (new-tab override)
 │   ├── welcome/           # First-install welcome page
-│   ├── warning/           # Domain safety warning page
 │   ├── auth/              # Authentication UI
-│   ├── classify/          # AI classification page
-│   ├── dedupe/            # Deduplication page
-│   ├── tags/              # Tag management page
 │   ├── components/        # Shared React components
 │   ├── services/          # Core services (AI, database, auth, backup)
 │   ├── stores/            # Zustand stores
 │   ├── types/             # TypeScript types
-│   ├── hooks/             # React hooks
-│   ├── i18n/              # Translation files
+│   ├── i18n/              # Translations
 │   └── utils/             # Utilities
-└── LICENSE                # GPL-3.0
+├── PRIVACY.md             # Privacy Policy
+└── LICENSE                # Apache-2.0
 ```
 
-## Scripts
+## Community
 
-| Command | Description |
-|---------|-------------|
-| `npm run dev` | Start dev server with hot reload |
-| `npm run build` | Production build |
-| `npm run typecheck` | TypeScript type checking |
-| `npm run lint` | ESLint check |
-| `npm run test` | Run tests |
+- **Report a scam**: [scamlens.org/en/report-scam](https://scamlens.org/en/report-scam)
+- **Scam guide**: [scamlens.org/en/scams](https://scamlens.org/en/scams)
+- **Email**: wayne@wayjet.io
 
-## Contributing
+## Privacy
 
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+All bookmark data is stored locally on your device. Page content is only sent to the AI provider you configure. Domain safety checks use our secure API — no browsing history is stored. See [PRIVACY.md](PRIVACY.md) for the full policy.
 
 ## License
 
-This project is licensed under the GPL-3.0 License -- see the [LICENSE](LICENSE) file for details.
+Apache-2.0 License — See [LICENSE](LICENSE) for details.

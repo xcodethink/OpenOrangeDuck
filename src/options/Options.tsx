@@ -213,7 +213,7 @@ export default function Options() {
         <div className="flex items-center justify-between mb-8">
           <div className="flex items-center gap-4">
             <button
-              onClick={() => chrome.tabs.create({ url: chrome.runtime.getURL('src/manager/index.html') })}
+              onClick={() => { window.location.href = chrome.runtime.getURL('src/manager/index.html'); }}
               className="w-9 h-9 rounded-lg bg-violet-500/10 hover:bg-violet-500/20 flex items-center justify-center transition-colors"
               title={t('options.backToHome')}
             >
@@ -301,31 +301,22 @@ export default function Options() {
                       {t('options.currentPlan')}
                     </div>
                     <div className="text-2xl font-bold flex items-center gap-2">
-                      {settings.plan === 'power' ? 'Power' : settings.plan === 'pro' ? 'Pro' : 'Free'}
+                      {settings.plan === 'power' || settings.plan === 'max' ? 'Max' : settings.plan === 'pro' ? 'Pro' : 'Free'}
                       <span className={`text-xs px-2 py-0.5 rounded-full ${
-                        settings.plan === 'power' ? 'bg-purple-500/30 text-purple-300' :
+                        settings.plan === 'power' || settings.plan === 'max' ? 'bg-purple-500/30 text-purple-300' :
                         settings.plan === 'pro' ? 'bg-blue-500/30 text-blue-300' :
                         'bg-gray-500/30 text-gray-300'
                       }`}>
-                        {settings.plan === 'power' ? t('options.planUnlimited') :
-                         settings.plan === 'pro' ? '200 AI/' + t('options.planMonth') :
-                         '15 AI/' + t('options.planMonth')}
+                        {settings.plan === 'power' || settings.plan === 'max' ? '80 credits / ' + t('options.planMonth') :
+                         settings.plan === 'pro' ? '30 credits / ' + t('options.planMonth') :
+                         t('options.planCredits')}
                       </span>
                     </div>
                   </div>
                   {settings.plan === 'free' && (
                     <button
-                      onClick={async () => {
-                        if (!settings.userId) {
-                          chrome.tabs.create({ url: chrome.runtime.getURL('src/auth/index.html') });
-                          return;
-                        }
-                        try {
-                          const data = await apiClient.get<{ checkoutUrl: string }>('/checkout/url?product=pro_monthly');
-                          chrome.tabs.create({ url: data.checkoutUrl });
-                        } catch {
-                          window.alert(t('options.upgradeUnavailable'));
-                        }
+                      onClick={() => {
+                        chrome.tabs.create({ url: 'https://scamlens.org/en/pricing' });
                       }}
                       className="px-4 py-2 bg-gradient-to-r from-violet-500 to-fuchsia-500 rounded-lg font-medium hover:from-violet-600 hover:to-fuchsia-600 transition-all text-sm"
                     >
@@ -350,23 +341,11 @@ export default function Options() {
                 </div>
 
                 {/* Usage Progress Bar */}
-                {settings.plan !== 'power' && (
-                  <div>
-                    <div className="flex justify-between text-xs sb-muted mb-1">
-                      <span>{t('options.usageThisMonth')}</span>
-                      <span>
-                        {settings.aiUsageThisMonth} / {settings.plan === 'pro' ? 200 : 15}
-                      </span>
-                    </div>
-                    <div className="w-full h-2 bg-white/10 rounded-full overflow-hidden">
-                      <div
-                        className={`h-full rounded-full transition-all ${
-                          settings.aiUsageThisMonth / (settings.plan === 'pro' ? 200 : 15) > 0.9
-                            ? 'bg-red-500' : 'bg-violet-500'
-                        }`}
-                        style={{ width: `${Math.min(100, (settings.aiUsageThisMonth / (settings.plan === 'pro' ? 200 : 15)) * 100)}%` }}
-                      />
-                    </div>
+                {settings.plan !== 'power' && settings.plan !== 'max' && (
+                  <div className="text-xs sb-muted mt-2">
+                    <a href="https://scamlens.org/en/pricing" target="_blank" rel="noopener" className="text-violet-400 hover:text-violet-300">
+                      {t('options.viewCredits')} →
+                    </a>
                   </div>
                 )}
               </div>
@@ -380,21 +359,21 @@ export default function Options() {
                 <ul className="text-xs sb-muted space-y-1">
                   {settings.plan === 'free' && (
                     <>
-                      <li>• 15 {t('options.aiAnalysesPerMonth')}</li>
+                      <li>• {t('options.featureBuyCredits')}</li>
                       <li>• {t('options.featureBasicScan')}</li>
                       <li>• {t('options.featureCommunity')}</li>
                     </>
                   )}
                   {settings.plan === 'pro' && (
                     <>
-                      <li>• 200 {t('options.aiAnalysesPerMonth')}</li>
+                      <li>• 30 {t('options.creditsPerMonth')} + 30% {t('options.creditDiscount')}</li>
                       <li>• {t('options.featureCloudSync')}</li>
                       <li>• {t('options.featurePriority')}</li>
                     </>
                   )}
-                  {settings.plan === 'power' && (
+                  {(settings.plan === 'power' || settings.plan === 'max') && (
                     <>
-                      <li>• {t('options.featureUnlimitedAI')}</li>
+                      <li>• 80 {t('options.creditsPerMonth')} + 50% {t('options.creditDiscount')}</li>
                       <li>• {t('options.featureBYOK')}</li>
                       <li>• {t('options.featureAllPro')}</li>
                     </>
@@ -685,7 +664,7 @@ export default function Options() {
                   type="checkbox"
                   checked={settings.autoSummary}
                   onChange={(e) => updateSetting('autoSummary', e.target.checked)}
-                  className="w-5 h-5 rounded sb-input text-violet-500 focus:ring-violet-500"
+                  className="w-5 h-5 rounded sb-input text-violet-500 focus:ring-violet-500 accent-violet-500"
                 />
               </label>
               <label className="flex items-center justify-between cursor-pointer">
@@ -694,7 +673,7 @@ export default function Options() {
                   type="checkbox"
                   checked={settings.autoTags}
                   onChange={(e) => updateSetting('autoTags', e.target.checked)}
-                  className="w-5 h-5 rounded sb-input text-violet-500 focus:ring-violet-500"
+                  className="w-5 h-5 rounded sb-input text-violet-500 focus:ring-violet-500 accent-violet-500"
                 />
               </label>
               <label className="flex items-center justify-between cursor-pointer">
@@ -703,7 +682,7 @@ export default function Options() {
                   type="checkbox"
                   checked={settings.autoEmbedding}
                   onChange={(e) => updateSetting('autoEmbedding', e.target.checked)}
-                  className="w-5 h-5 rounded sb-input text-violet-500 focus:ring-violet-500"
+                  className="w-5 h-5 rounded sb-input text-violet-500 focus:ring-violet-500 accent-violet-500"
                 />
               </label>
             </div>
@@ -727,7 +706,7 @@ export default function Options() {
                     type="checkbox"
                     checked={settings.realtimeProtection}
                     onChange={(e) => updateSetting('realtimeProtection', e.target.checked)}
-                    className="w-5 h-5 rounded sb-input text-violet-500 focus:ring-violet-500"
+                    className="w-5 h-5 rounded sb-input text-violet-500 focus:ring-violet-500 accent-violet-500"
                   />
                 </label>
 
@@ -895,27 +874,25 @@ export default function Options() {
           <div className="flex gap-3">
             <button
               onClick={handleSave}
-              className={`flex-1 py-4 rounded-xl font-semibold text-lg transition-all ${saved
+              className={`flex-1 py-3 rounded-lg font-medium text-sm transition-all flex items-center justify-center gap-2 ${saved
                   ? 'bg-emerald-500 text-white'
-                  : 'bg-gradient-to-r from-violet-500 to-fuchsia-500 text-white hover:from-violet-600 hover:to-fuchsia-600'
+                  : 'bg-violet-600 text-white hover:bg-violet-700 shadow-sm'
                 }`}
             >
               {saved ? (
-                <span className="inline-flex items-center gap-2">
+                <>
                   <Check className="w-4 h-4" />
                   {t('options.saved')}
-                </span>
+                </>
               ) : (
                 t('options.save')
               )}
             </button>
             <button
-              onClick={() => {
-                chrome.tabs.create({ url: chrome.runtime.getURL('src/manager/index.html') });
-              }}
-              className="px-6 py-4 rounded-xl font-semibold text-lg transition-all sb-card hover:bg-violet-500/10 text-violet-400 flex items-center gap-2"
+              onClick={() => { window.location.href = chrome.runtime.getURL('src/manager/index.html'); }}
+              className="px-5 py-3 rounded-lg font-medium text-sm transition-all sb-card sb-card-hover text-violet-400 flex items-center gap-2"
             >
-              <Home className="w-5 h-5" />
+              <Home className="w-4 h-4" />
               {t('options.returnHome')}
             </button>
           </div>
@@ -926,7 +903,7 @@ export default function Options() {
           <p>OrangeDuck v1.1.0</p>
           <p className="mt-1">{t('options.poweredBy')}</p>
           <a
-            href="https://your-site.example.com/privacy"
+            href="https://scamlens.org/en/privacy"
             target="_blank"
             rel="noreferrer"
             className="inline-flex items-center gap-1 mt-2 text-violet-400 hover:text-violet-300 transition-colors"
