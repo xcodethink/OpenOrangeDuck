@@ -161,10 +161,10 @@ function createBadge(data: RiskResponse): HTMLElement {
     typeEl.textContent = `· ${data.walletType}`;
   }
 
-  // ScamLens brand
+  // Brand label (customize with your own name)
   const brandEl = document.createElement('span');
   brandEl.style.cssText = `font-size: 10px; opacity: 0.5; margin-left: 4px;`;
-  brandEl.textContent = 'ScamLens';
+  brandEl.textContent = 'OrangeDuck';
 
   badge.appendChild(scoreEl);
   badge.appendChild(labelEl);
@@ -198,7 +198,7 @@ function createLoadingBadge(): HTMLElement {
     border: 1px solid #e5e7eb;
     vertical-align: middle;
   `;
-  badge.innerHTML = `<span style="animation: pulse 1.5s infinite; opacity: 0.6;">⏳</span> ScamLens checking...`;
+  badge.innerHTML = `<span style="animation: pulse 1.5s infinite; opacity: 0.6;">⏳</span> Checking risk...`;
   return badge;
 }
 

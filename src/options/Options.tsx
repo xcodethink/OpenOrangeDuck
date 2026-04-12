@@ -316,7 +316,8 @@ export default function Options() {
                   {settings.plan === 'free' && (
                     <button
                       onClick={() => {
-                        chrome.tabs.create({ url: 'https://scamlens.org/en/pricing' });
+                        // TODO: Replace with your own pricing page
+                        chrome.tabs.create({ url: 'https://your-site.example.com/en/pricing' });
                       }}
                       className="px-4 py-2 bg-gradient-to-r from-violet-500 to-fuchsia-500 rounded-lg font-medium hover:from-violet-600 hover:to-fuchsia-600 transition-all text-sm"
                     >
@@ -343,7 +344,7 @@ export default function Options() {
                 {/* Usage Progress Bar */}
                 {settings.plan !== 'power' && settings.plan !== 'max' && (
                   <div className="text-xs sb-muted mt-2">
-                    <a href="https://scamlens.org/en/pricing" target="_blank" rel="noopener" className="text-violet-400 hover:text-violet-300">
+                    <a href="https://your-site.example.com/en/pricing" target="_blank" rel="noopener" className="text-violet-400 hover:text-violet-300">
                       {t('options.viewCredits')} →
                     </a>
                   </div>
@@ -903,7 +904,7 @@ export default function Options() {
           <p>OrangeDuck v1.1.0</p>
           <p className="mt-1">{t('options.poweredBy')}</p>
           <a
-            href="https://scamlens.org/en/privacy"
+            href="https://your-site.example.com/en/privacy"
             target="_blank"
             rel="noreferrer"
             className="inline-flex items-center gap-1 mt-2 text-violet-400 hover:text-violet-300 transition-colors"

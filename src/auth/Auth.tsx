@@ -560,9 +560,10 @@ export default function Auth() {
         <div className="mt-8 text-center text-xs sb-muted">
           <p>
             {t('auth.termsNotice')}
-            <a href="https://scamlens.org/en/terms" target="_blank" rel="noopener noreferrer" className="text-violet-400 hover:underline">{t('auth.termsLink')}</a>
+            {/* TODO: Replace with your own terms/privacy URLs */}
+            <a href="https://your-site.example.com/en/terms" target="_blank" rel="noopener noreferrer" className="text-violet-400 hover:underline">{t('auth.termsLink')}</a>
             {t('auth.and')}
-            <a href="https://scamlens.org/en/privacy" target="_blank" rel="noopener noreferrer" className="text-violet-400 hover:underline">{t('auth.privacyLink')}</a>
+            <a href="https://your-site.example.com/en/privacy" target="_blank" rel="noopener noreferrer" className="text-violet-400 hover:underline">{t('auth.privacyLink')}</a>
           </p>
         </div>
       </div>

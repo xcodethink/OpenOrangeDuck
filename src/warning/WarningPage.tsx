@@ -154,7 +154,7 @@ export default function WarningPage() {
               : (t('warning.suspiciousTitle', 'Suspicious Website Detected'))}
           </h1>
           <p className="text-gray-400 mt-2 text-sm">
-            {t('warning.poweredBy', 'Protected by ScamLens — AI-powered threat intelligence')}
+            {t('warning.poweredBy', 'Protected by OrangeDuck — AI-powered threat intelligence')}
           </p>
         </div>
 
@@ -273,7 +273,7 @@ export default function WarningPage() {
         {/* Footer with disable tip */}
         <div className="text-center space-y-1">
           <p className="text-xs text-gray-600">
-            {t('warning.footer', 'ScamLens uses 90+ threat intelligence sources to protect you from phishing, scams, and malware.')}
+            {t('warning.footer', 'OrangeDuck uses multi-source threat intelligence to protect you from phishing, scams, and malware.')}
           </p>
           <p className="text-xs text-gray-600">
             {t('warning.disableTip', 'You can disable real-time protection in')}{' '}
