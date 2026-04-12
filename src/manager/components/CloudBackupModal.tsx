@@ -120,12 +120,14 @@ export default function CloudBackupModal({ isOpen, onClose, isLoggedIn }: Props)
         </div>
 
         {!isLoggedIn ? (
-          <div className="text-center py-8">
-            <Lock className="w-12 h-12 mx-auto mb-4 sb-muted" />
-            <p className="sb-muted mb-4">{t('backup.loginRequired')}</p>
+          <div className="text-center py-10">
+            <div className="w-16 h-16 rounded-2xl bg-violet-500/15 border border-violet-500/30 flex items-center justify-center mx-auto mb-5">
+              <Lock className="w-8 h-8 text-violet-400" />
+            </div>
+            <p className="text-sm text-[var(--text-secondary)] mb-5">{t('backup.loginRequired')}</p>
             <button
               onClick={() => chrome.tabs.create({ url: chrome.runtime.getURL('src/auth/index.html') })}
-              className="px-4 py-2 sb-button-primary rounded-lg"
+              className="px-6 py-2.5 sb-button-primary rounded-xl font-medium"
             >
               {t('auth.signIn')}
             </button>

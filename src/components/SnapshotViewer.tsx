@@ -277,7 +277,7 @@ export default function SnapshotViewer({ bookmark, onClose, initialTab = 'overvi
         {/* Footer */}
         <div className="flex items-center justify-between p-4 border-t sb-divider text-xs sb-muted">
           <span>
-            {t('snapshot.savedAt')}: {new Date(bookmark.createdAt).toLocaleString()}
+            {t('snapshot.savedAt')}: {new Date(bookmark.snapshot.createdAt || bookmark.createdAt).toLocaleString()}
           </span>
           <div className="flex gap-2">
             <button

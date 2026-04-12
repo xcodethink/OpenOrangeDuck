@@ -78,11 +78,11 @@ export default function FeatureTour({ onComplete }: Props) {
         >
           {step < STEPS.length - 1 ? (
             <>
-              {t('welcome.getStarted')}
+              {t('tour.next', 'Next')}
               <ArrowRight className="w-4 h-4" />
             </>
           ) : (
-            t('welcome.skipToManager')
+            t('tour.done', "Let's Go!")
           )}
         </button>
       </div>

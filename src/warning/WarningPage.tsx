@@ -76,11 +76,11 @@ export default function WarningPage() {
   const handleProceed = () => {
     if (!threatInfo?.url || !canProceed) return;
     // Store bypass so we don't warn again for this domain in this session
-    chrome.storage.session.get('scamlens_bypassed', (result) => {
-      const bypassed: string[] = result.scamlens_bypassed || [];
+    chrome.storage.session.get('orangeduck_bypassed', (result) => {
+      const bypassed: string[] = result.orangeduck_bypassed || [];
       if (!bypassed.includes(threatInfo.domain)) {
         bypassed.push(threatInfo.domain);
-        chrome.storage.session.set({ scamlens_bypassed: bypassed });
+        chrome.storage.session.set({ orangeduck_bypassed: bypassed });
       }
       window.location.href = threatInfo.url;
     });
@@ -88,13 +88,15 @@ export default function WarningPage() {
 
   const handleReport = () => {
     if (!threatInfo?.domain) return;
-    const reportUrl = `https://scamlens.org/en/report?domain=${encodeURIComponent(threatInfo.domain)}`;
+    // TODO: Replace with your own report URL
+    const reportUrl = `https://your-site.example.com/en/report?domain=${encodeURIComponent(threatInfo.domain)}`;
     window.open(reportUrl, '_blank', 'noopener,noreferrer');
   };
 
   const handleViewDetails = () => {
     if (!threatInfo?.domain) return;
-    const detailsUrl = `https://scamlens.org/en/report/${encodeURIComponent(threatInfo.domain)}`;
+    // TODO: Replace with your own report URL
+    const detailsUrl = `https://your-site.example.com/en/report/${encodeURIComponent(threatInfo.domain)}`;
     window.open(detailsUrl, '_blank', 'noopener,noreferrer');
   };
 

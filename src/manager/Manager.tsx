@@ -27,7 +27,7 @@ import FeatureTour from './components/FeatureTour';
 import type { Bookmark, SnapshotLevel } from '../types';
 import type { Language } from '../types/settings';
 import { supportedLanguages } from '../i18n';
-import { Library, Sun, Moon, Languages, MessageCircle } from 'lucide-react';
+import { Library, Sun, Moon, Languages, MessageCircle, HeartPulse, Check, AlertTriangle, X } from 'lucide-react';
 
 const TOUR_COMPLETED_KEY = 'smartBookmarksTourCompleted';
 
@@ -46,6 +46,8 @@ export default function Manager() {
   const [snapshotInitialTab, setSnapshotInitialTab] = useState<string>('overview');
   const [snapshotUpdatingLevel, setSnapshotUpdatingLevel] = useState<SnapshotLevel | null>(null);
   const [isChecking, setIsChecking] = useState(false);
+  const [healthProgress, setHealthProgress] = useState<{ checked: number; total: number; phase: string } | null>(null);
+  const [healthResults, setHealthResults] = useState<{ total: number; healthy: number; dead: number } | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
   const searchTimerRef = useRef<ReturnType<typeof setTimeout>>();
 
@@ -119,6 +121,17 @@ export default function Manager() {
     globalThis.addEventListener('token-expiry-warning', handleTokenWarning);
     return () => globalThis.removeEventListener('token-expiry-warning', handleTokenWarning);
   }, [t]);
+
+  // Listen for health check progress from background
+  useEffect(() => {
+    const listener = (message: { type: string; checked: number; total: number; phase: string }) => {
+      if (message.type === 'HEALTH_CHECK_PROGRESS') {
+        setHealthProgress({ checked: message.checked, total: message.total, phase: message.phase });
+      }
+    };
+    chrome.runtime.onMessage.addListener(listener);
+    return () => chrome.runtime.onMessage.removeListener(listener);
+  }, []);
 
   // Apply language setting
   useEffect(() => {
@@ -215,16 +228,20 @@ export default function Manager() {
   const handleHealthCheck = async () => {
     if (isChecking) return;
     setIsChecking(true);
-    toast.info(t('feature.checking'));
+    setHealthResults(null);
+    setHealthProgress({ checked: 0, total: 0, phase: 'checking' });
 
     try {
-      await chrome.runtime.sendMessage({ type: 'PERFORM_HEALTH_CHECK' });
+      const response = await chrome.runtime.sendMessage({ type: 'PERFORM_HEALTH_CHECK' });
       await loadBookmarks();
-      toast.success(t('feature.healthCheck') + ' ' + t('common.success'));
+      if (response?.results) {
+        setHealthResults(response.results);
+      }
     } catch (error) {
       toast.error(t('common.error'));
     } finally {
       setIsChecking(false);
+      setHealthProgress(null);
     }
   };
 
@@ -567,6 +584,67 @@ export default function Manager() {
               onBatchModeClick={toggleBatchMode}
               isBatchMode={isBatchMode}
             />
+
+            {/* Health Check Progress Bar */}
+            {isChecking && healthProgress && healthProgress.total > 0 && (
+              <div className="sb-card rounded-lg p-3 space-y-2">
+                <div className="flex items-center justify-between text-sm">
+                  <div className="flex items-center gap-2">
+                    <HeartPulse className="w-4 h-4 text-violet-400 animate-pulse" />
+                    <span className="sb-muted">
+                      {healthProgress.phase === 'retrying'
+                        ? t('healthCheck.retrying')
+                        : t('healthCheck.progress', {
+                            checked: Math.min(healthProgress.checked, healthProgress.total),
+                            total: healthProgress.total,
+                          })}
+                    </span>
+                  </div>
+                  <span className="text-xs sb-muted">
+                    {Math.round((Math.min(healthProgress.checked, healthProgress.total) / healthProgress.total) * 100)}%
+                  </span>
+                </div>
+                <div className="w-full h-1.5 bg-[var(--bg-tertiary)] rounded-full overflow-hidden">
+                  <div
+                    className="h-full bg-gradient-to-r from-violet-500 to-fuchsia-500 rounded-full transition-all duration-300"
+                    style={{
+                      width: `${Math.round((Math.min(healthProgress.checked, healthProgress.total) / healthProgress.total) * 100)}%`,
+                    }}
+                  />
+                </div>
+              </div>
+            )}
+
+            {/* Health Check Results Banner */}
+            {healthResults && !isChecking && (
+              <div className={`rounded-lg p-3 flex items-center justify-between ${
+                healthResults.dead > 0
+                  ? 'bg-amber-500/10 border border-amber-500/20'
+                  : 'bg-emerald-500/10 border border-emerald-500/20'
+              }`}>
+                <div className="flex items-center gap-3">
+                  {healthResults.dead > 0 ? (
+                    <AlertTriangle className="w-5 h-5 text-amber-400 shrink-0" />
+                  ) : (
+                    <Check className="w-5 h-5 text-emerald-400 shrink-0" />
+                  )}
+                  <div>
+                    <p className="text-sm font-medium">{t('healthCheck.resultTitle')}</p>
+                    <p className="text-xs sb-muted">
+                      {healthResults.dead > 0
+                        ? t('healthCheck.resultSummary', healthResults)
+                        : t('healthCheck.allHealthy', { total: healthResults.total })}
+                    </p>
+                  </div>
+                </div>
+                <button
+                  onClick={() => setHealthResults(null)}
+                  className="sb-muted hover:text-[var(--text-primary)] transition-colors p-1"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              </div>
+            )}
 
             {/* Batch Mode Bar */}
             {isBatchMode && selectedIds.size > 0 && (

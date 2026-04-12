@@ -165,9 +165,11 @@ export default function DetailPanel({ bookmark, onClose, onViewSnapshot, onSnaps
   if (!bookmark) {
     return (
       <div className="w-96 sb-surface border-l sb-divider flex items-center justify-center">
-        <div className="text-center sb-muted p-8">
-          <FileText className="w-16 h-16 mx-auto mb-4" />
-          <p className="text-lg font-medium">{t('detail.selectHint')}</p>
+        <div className="text-center p-8">
+          <div className="w-14 h-14 rounded-2xl bg-violet-500/10 flex items-center justify-center mx-auto mb-4">
+            <FileText className="w-7 h-7 text-violet-400" />
+          </div>
+          <p className="text-sm sb-muted">{t('detail.selectHint')}</p>
         </div>
       </div>
     );

@@ -30,8 +30,7 @@ export default function Welcome() {
   }, []);
 
   function openManager() {
-    chrome.tabs.create({ url: chrome.runtime.getURL('src/manager/index.html') });
-    window.close();
+    window.location.href = chrome.runtime.getURL('src/manager/index.html');
   }
 
   function openAuth() {

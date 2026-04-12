@@ -170,7 +170,7 @@ export default function TagsPage() {
   };
 
   const goHome = () => {
-    chrome.tabs.create({ url: chrome.runtime.getURL('src/manager/index.html') });
+    window.location.href = chrome.runtime.getURL('src/manager/index.html');
   };
 
   if (isLoading) {

@@ -9,6 +9,12 @@ import { DEFAULT_SETTINGS } from '../types/settings';
 import type { Bookmark, BookmarkStatus, SnapshotLevel, DomainInfo } from '../types';
 import { checkUrlSafety, isDomainBypassed, isDomainWhitelisted, shouldWarn, buildWarningUrl } from '../services/safetyCheck';
 
+// Global error boundary — prevent Service Worker crash on unhandled rejections
+self.addEventListener('unhandledrejection', (event) => {
+  console.error('[SW] Unhandled promise rejection:', event.reason);
+  event.preventDefault(); // Prevent SW termination
+});
+
 const SETTINGS_KEY = 'smartBookmarksSettings';
 
 async function getAiNotConfiguredError(): Promise<string> {
@@ -250,7 +256,7 @@ function setupContextMenu() {
       console.error('Failed to remove context menus:', chrome.runtime.lastError);
     }
     chrome.contextMenus.create({
-      id: 'save-to-smart-bookmarks',
+      id: 'save-to-orangeduck',
       title: chrome.i18n.getMessage('cmdSaveBookmark') || 'Save to OrangeDuck',
       contexts: ['page', 'link'],
     }, () => {
@@ -262,7 +268,7 @@ function setupContextMenu() {
 }
 
 chrome.contextMenus.onClicked.addListener(async (info, tab) => {
-  if (info.menuItemId === 'save-to-smart-bookmarks' && tab?.id) {
+  if (info.menuItemId === 'save-to-orangeduck' && tab?.id) {
     const url = info.linkUrl || info.pageUrl || tab.url;
     if (url) {
       await saveBookmark(tab.id, url);
@@ -671,6 +677,16 @@ async function performHealthCheck() {
 
   // ---- Pass 1: check all URLs in batches, write results per batch ----
   const failedBookmarks: { id: string; url: string; status: BookmarkStatus }[] = [];
+  let checkedCount = 0;
+  const totalCount = bookmarks.length;
+
+  // Send progress update to all extension pages
+  const sendProgress = (checked: number, total: number, phase: 'checking' | 'retrying') => {
+    chrome.runtime.sendMessage({
+      type: 'HEALTH_CHECK_PROGRESS',
+      checked, total, phase,
+    }).catch(() => {}); // ignore if no listeners
+  };
 
   for (let i = 0; i < bookmarks.length; i += BATCH_SIZE) {
     const batch = bookmarks.slice(i, i + BATCH_SIZE);
@@ -690,13 +706,20 @@ async function performHealthCheck() {
       const bm = bookmarks.find(b => b.id === fid);
       if (bm) failedBookmarks.push(bm);
     }
+
+    checkedCount += batch.length;
+    sendProgress(checkedCount, totalCount, 'checking');
   }
 
   // ---- Pass 2: retry all failed URLs once (network hiccup recovery) ----
+  let totalHealthy = totalCount - failedBookmarks.length;
+  let totalDead = 0;
+
   if (failedBookmarks.length > 0) {
     // Small delay to let transient network issues clear
     await new Promise(r => setTimeout(r, 2000));
 
+    let retryChecked = 0;
     for (let i = 0; i < failedBookmarks.length; i += BATCH_SIZE) {
       const batch = failedBookmarks.slice(i, i + BATCH_SIZE);
       const retryResults = await Promise.all(batch.map(checkUrl));
@@ -706,6 +729,7 @@ async function performHealthCheck() {
 
       if (healthyIds.length > 0) {
         try { await bookmarkService.bulkUpdateStatus(healthyIds, 'healthy'); } catch {}
+        totalHealthy += healthyIds.length;
       }
 
       // Two-strike rule: only mark dead if it was already dead before this check
@@ -718,14 +742,21 @@ async function performHealthCheck() {
 
       if (confirmedDeadIds.length > 0) {
         try { await bookmarkService.bulkUpdateStatus(confirmedDeadIds, 'dead'); } catch {}
+        totalDead += confirmedDeadIds.length;
       }
       // First-time failures: keep their current status (don't mark dead on a single check)
-      // They'll be confirmed dead on the next scheduled health check if still unreachable
+      totalHealthy += firstStrikeIds.length;
+
       if (firstStrikeIds.length > 0) {
         console.warn(`[HealthCheck] First-strike (not marking dead):`, firstStrikeIds.length, 'URLs');
       }
+
+      retryChecked += batch.length;
+      sendProgress(totalCount + retryChecked, totalCount + failedBookmarks.length, 'retrying');
     }
   }
+
+  return { total: totalCount, healthy: totalHealthy, dead: totalDead };
 }
 
 // Inline extraction function to run directly in the page context
@@ -1082,8 +1113,8 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (message.type === 'PERFORM_HEALTH_CHECK') {
     (async () => {
       try {
-        await performHealthCheck();
-        sendResponse({ success: true });
+        const results = await performHealthCheck();
+        sendResponse({ success: true, results });
       } catch (error) {
         sendResponse({ success: false, error: (error as Error).message });
       }
@@ -1297,7 +1328,7 @@ chrome.webNavigation.onCommitted.addListener(async (details) => {
     // Check if user has safety check enabled
     if (settings.realtimeProtection === false) return;
 
-    // Check safety via OrangeDuck API
+    // Check safety via backend API
     const result = await checkUrlSafety(url);
     if (!result) return;
 

@@ -88,7 +88,7 @@ export default function ImportExportModal({ isOpen, onClose, onImportComplete }:
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = `smart-bookmarks-${new Date().toISOString().split('T')[0]}.${format}`;
+      a.download = `orangeduck-${new Date().toISOString().split('T')[0]}.${format}`;
       a.click();
       URL.revokeObjectURL(url);
       toast.success(t('export.success'));

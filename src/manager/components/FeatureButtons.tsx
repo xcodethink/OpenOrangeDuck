@@ -40,19 +40,19 @@ export default function FeatureButtons({
   const { t } = useTranslation();
 
   const openDedupePage = () => {
-    chrome.tabs.create({ url: chrome.runtime.getURL('src/dedupe/index.html') });
+    window.location.href = chrome.runtime.getURL('src/dedupe/index.html');
   };
 
   const openTagsPage = () => {
-    chrome.tabs.create({ url: chrome.runtime.getURL('src/tags/index.html') });
+    window.location.href = chrome.runtime.getURL('src/tags/index.html');
   };
 
   const openClassifyPage = () => {
-    chrome.tabs.create({ url: chrome.runtime.getURL('src/classify/index.html') });
+    window.location.href = chrome.runtime.getURL('src/classify/index.html');
   };
 
   const openSettings = () => {
-    chrome.runtime.openOptionsPage();
+    window.location.href = chrome.runtime.getURL('src/options/index.html');
   };
 
   const features = [

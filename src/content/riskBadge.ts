@@ -1,16 +1,17 @@
 /**
- * ScamLens Risk Badge for Block Explorers
+ * Risk Badge for Block Explorers
  *
  * Injects a risk score badge next to wallet addresses on:
  * - Etherscan (etherscan.io + all chain variants)
  * - Tronscan (tronscan.org)
  * - BscScan, Polygonscan, Arbiscan, etc.
  *
- * Shows ScamLens risk level (Clean/Low/Medium/High/Critical) directly
+ * Shows risk level (Clean/Low/Medium/High/Critical) directly
  * on the explorer page so users can assess risk without leaving the site.
  */
 
-const API_BASE = 'https://api.scamlens.org';
+// TODO: Replace with your own safety check API endpoint
+const API_BASE = 'https://your-api.example.com';
 
 // ─── Explorer Detection ─────────────────────────────
 
@@ -113,7 +114,7 @@ function createBadge(data: RiskResponse): HTMLElement {
   const colors = RISK_COLORS[data.riskLevel] || RISK_COLORS.medium;
 
   const badge = document.createElement('div');
-  badge.id = 'scamlens-risk-badge';
+  badge.id = 'orangeduck-risk-badge';
   badge.style.cssText = `
     display: inline-flex;
     align-items: center;
@@ -170,9 +171,9 @@ function createBadge(data: RiskResponse): HTMLElement {
   if (typeEl.textContent) badge.appendChild(typeEl);
   badge.appendChild(brandEl);
 
-  // Click → open ScamLens report
+  // Click → open report page (TODO: replace with your own report URL)
   badge.addEventListener('click', () => {
-    window.open(`https://scamlens.org/en/report/crypto/${encodeURIComponent(data.riskScore > 0 ? extractAddressFromUrl() || '' : '')}`, '_blank');
+    window.open(`https://your-site.example.com/en/report/crypto/${encodeURIComponent(data.riskScore > 0 ? extractAddressFromUrl() || '' : '')}`, '_blank');
   });
 
   badge.addEventListener('mouseenter', () => { badge.style.opacity = '0.85'; });
@@ -183,7 +184,7 @@ function createBadge(data: RiskResponse): HTMLElement {
 
 function createLoadingBadge(): HTMLElement {
   const badge = document.createElement('span');
-  badge.id = 'scamlens-risk-badge';
+  badge.id = 'orangeduck-risk-badge';
   badge.style.cssText = `
     display: inline-flex;
     align-items: center;
@@ -211,7 +212,7 @@ async function injectRiskBadge(): Promise<void> {
   if (!address) return;
 
   // Don't inject twice
-  if (document.getElementById('scamlens-risk-badge')) return;
+  if (document.getElementById('orangeduck-risk-badge')) return;
 
   // Find injection target
   const target = document.querySelector(config.titleSelector);
@@ -247,7 +248,7 @@ const observer = new MutationObserver(() => {
   if (window.location.href !== lastUrl) {
     lastUrl = window.location.href;
     // Remove old badge and re-inject
-    document.getElementById('scamlens-risk-badge')?.remove();
+    document.getElementById('orangeduck-risk-badge')?.remove();
     setTimeout(() => injectRiskBadge(), 1000); // Wait for SPA render
   }
 });

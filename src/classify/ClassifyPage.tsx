@@ -314,7 +314,7 @@ export default function ClassifyPage() {
   };
 
   const goHome = () => {
-    chrome.tabs.create({ url: chrome.runtime.getURL('src/manager/index.html') });
+    window.location.href = chrome.runtime.getURL('src/manager/index.html');
   };
 
   if (isLoading) {
@@ -443,8 +443,11 @@ export default function ClassifyPage() {
 
               {!isLoggedIn ? (
                 <div className="flex flex-col items-center gap-4">
-                  <div className="p-4 rounded-xl bg-amber-500/10 border border-amber-500/30 text-center max-w-md">
-                    <p className="text-sm text-amber-400 mb-3">{t('errors.AI_NOT_LOGGED_IN')}</p>
+                  <div className="p-6 rounded-2xl bg-violet-500/10 border border-violet-500/30 text-center max-w-md">
+                    <div className="w-14 h-14 rounded-2xl bg-violet-500/20 border border-violet-500/30 flex items-center justify-center mx-auto mb-4">
+                      <LogIn className="w-7 h-7 text-violet-400" />
+                    </div>
+                    <p className="text-sm text-violet-300 mb-4">{t('errors.AI_NOT_LOGGED_IN')}</p>
                     <button
                       onClick={() => chrome.tabs.create({ url: chrome.runtime.getURL('src/auth/index.html') })}
                       className="flex items-center gap-2 mx-auto px-6 py-3 bg-gradient-to-r from-violet-500 to-fuchsia-500 text-white rounded-xl text-sm font-medium hover:opacity-90 transition-opacity"

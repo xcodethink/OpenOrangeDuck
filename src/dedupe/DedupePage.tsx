@@ -269,7 +269,7 @@ export default function DedupePage() {
   };
 
   const goHome = () => {
-    chrome.tabs.create({ url: chrome.runtime.getURL('src/manager/index.html') });
+    window.location.href = chrome.runtime.getURL('src/manager/index.html');
   };
 
   // Count groups by type (excluding processed ones)
@@ -310,7 +310,7 @@ export default function DedupePage() {
                 </button>
               </div>
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center">
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-violet-500 to-fuchsia-500 flex items-center justify-center">
                   <GitMerge className="w-5 h-5 text-white" />
                 </div>
                 <div>
@@ -372,8 +372,8 @@ export default function DedupePage() {
         {/* ===== INITIAL STATE ===== */}
         {pageState === 'initial' && (
           <div className="flex flex-col items-center justify-center py-12">
-            <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-amber-500/20 to-orange-600/20 flex items-center justify-center mb-6">
-              <Search className="w-10 h-10 text-amber-400" />
+            <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-violet-500/20 to-fuchsia-500/20 flex items-center justify-center mb-6">
+              <Search className="w-10 h-10 text-violet-400" />
             </div>
             <h2 className="text-xl font-semibold mb-2">{t('dedupe.initialTitle')}</h2>
             <p className="sb-muted text-sm mb-8 text-center max-w-md">{t('dedupe.initialDesc')}</p>
@@ -405,7 +405,7 @@ export default function DedupePage() {
 
             <button
               onClick={startAnalysis}
-              className="px-8 py-3 bg-gradient-to-r from-amber-500 to-orange-600 text-white rounded-xl font-medium hover:from-amber-600 hover:to-orange-700 transition-all shadow-lg hover:shadow-xl flex items-center gap-2"
+              className="px-8 py-3 bg-gradient-to-r from-violet-500 to-fuchsia-500 text-white rounded-xl font-medium hover:from-violet-600 hover:to-fuchsia-600 transition-all shadow-lg hover:shadow-xl flex items-center gap-2"
             >
               <Sparkles className="w-5 h-5" />
               {t('dedupe.startAnalysis')}
@@ -420,7 +420,7 @@ export default function DedupePage() {
         {/* ===== ANALYZING STATE ===== */}
         {pageState === 'analyzing' && (
           <div className="flex flex-col items-center justify-center py-16">
-            <Loader2 className="w-12 h-12 text-amber-500 animate-spin mb-6" />
+            <Loader2 className="w-12 h-12 text-violet-500 animate-spin mb-6" />
             <h2 className="text-lg font-semibold mb-6">{t('dedupe.analyzing')}</h2>
 
             <div className="w-full max-w-md space-y-3">
