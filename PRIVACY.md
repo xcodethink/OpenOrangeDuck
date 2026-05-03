@@ -6,9 +6,9 @@
 
 ## 1. Operator / 运营者
 
-Smart Bookmarks is developed and operated by **OrangeDuck** ("we", "us", "our"). Our website is [your-site.example.com](https://your-site.example.com).
+Smart Bookmarks is developed and operated by **OrangeDuck** ("we", "us", "our"). Our website is [scamlens.org](https://scamlens.org/en/extension).
 
-Smart Bookmarks 由 **OrangeDuck**（"我们"）开发和运营。我们的网站是 [your-site.example.com](https://your-site.example.com)。
+Smart Bookmarks 由 **OrangeDuck**（"我们"）开发和运营。我们的网站是 [scamlens.org](https://scamlens.org/en/extension)。
 
 ---
 
@@ -39,9 +39,9 @@ When you create an account or sign in, we collect and store the following inform
 
 ### 4.1 Proxy Backend (Default Mode) / 代理后端（默认模式）
 
-By default, when you save a bookmark with AI features enabled, the following data is sent to our backend server at `api.your-site.example.com`:
+By default, when you save a bookmark with AI features enabled, the following data is sent to our backend server at `api.scamlens.org`:
 
-默认情况下，当您在启用 AI 功能的情况下保存书签时，以下数据将发送到我们的后端服务器 `api.your-site.example.com`：
+默认情况下，当您在启用 AI 功能的情况下保存书签时，以下数据将发送到我们的后端服务器 `api.scamlens.org`：
 
 - **Page content** truncated to 4,000 characters / 截断至 4,000 字符的**页面内容**
 - **Page title** / **页面标题**
@@ -172,7 +172,7 @@ This extension interacts with the following external services:
 
 | Service / 服务 | Purpose / 用途 | Data Sent / 发送的数据 |
 |---|---|---|
-| Our backend (`api.your-site.example.com`) | AI proxy, embeddings, auth, cloud backup | Page content, titles, domains, account data / 页面内容、标题、域名、账户数据 |
+| Our backend (`api.scamlens.org`) | AI proxy, embeddings, auth, cloud backup | Page content, titles, domains, account data / 页面内容、标题、域名、账户数据 |
 | Anthropic, OpenAI, Google, xAI (Direct AI mode) | AI summarization (user-configured) | Page content, titles / 页面内容、标题 |
 | Google OAuth (`accounts.google.com`) | Authentication / 身份验证 | OAuth credentials / OAuth 凭据 |
 | Google Favicon Service (`google.com/s2/favicons`) | Website icons / 网站图标 | Domain names / 域名 |
@@ -232,7 +232,7 @@ For privacy-related questions, concerns, or requests, please contact us:
 如有隐私相关问题、顾虑或请求，请联系我们：
 
 - **Email / 邮箱:** [wayne@wayjet.io](mailto:wayne@wayjet.io)
-- **Website / 网站:** [your-site.example.com](https://your-site.example.com)
+- **Website / 网站:** [scamlens.org](https://scamlens.org/en/extension)
 - **Operator / 运营者:** OrangeDuck
 
 ---
